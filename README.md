@@ -31,3 +31,5 @@ SO THAT I can create a strong password that provides greater security
  # Link to Website
 https://hloiii.github.io/hlo-password-generator-hlo/
 
+
+![screenshot](assets/images/Capture.PNG)
