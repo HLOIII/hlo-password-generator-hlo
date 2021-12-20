@@ -28,8 +28,7 @@ function writePassword() {
     else if (numCharacters >= 8 && numCharacters <= 128) {
         var okSpecial = window.confirm("Click OK to confirm including special characters.");
         var okNumeric = window.confirm("Click OK to confirm including numeric values.");
-        var okUpperCase = window.confirm("Click OK to confirm including upprcase characters.");
-        var okLowerCase = window.confirm("Click OK to confirm including lowercase characters.");
+
 
         var combinedArray = [];
 
@@ -42,7 +41,7 @@ function writePassword() {
         if (okNumeric) {
             var randomElement2 = numbers[Math.floor(Math.random() * numbers.length)];
             passwordGenerated = passwordGenerated + randomElement2;
-            combinedArray = combinedArray.concat(numbers);
+
         }
 
         if (okUpperCase) {
@@ -57,12 +56,20 @@ function writePassword() {
             combinedArray = combinedArray.concat(lowerCase);
         }
 
-        var password = generatePassword();
-        var passwordText = document.querySelector("#password");
+        // Write password to the #password input
+        function writePassword() {
+            passwordGenerated = "";
 
-        passwordText.value = password;
+            generatePassword();
+            var password = passwordGenerated;
+            if (!password) {
+                return;
+            }
 
-    }
+            var passwordText = document.querySelector("#password");
 
-    // Add event listener to generate button
-    generateBtn.addEventListener("click", writePassword);
+            passwordText.value = password;
+        }
+
+        // Add event listener to generate button
+        generateBtn.addEventListener("click", writePassword);
