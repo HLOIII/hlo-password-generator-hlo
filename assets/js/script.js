@@ -7,18 +7,22 @@ var passwordGenerated = "";
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-function writePassword() {
-    // This will ask about the length of password
+// Generate password function
+
+var generatePassword = function () {
+
+
+
+    // Ask users about the length of password
     var numCharacters = parseInt(window.prompt("How many characters would you like your password to contain?(between 8-128 characters):"));
 
-    // This makes sure that the length of requested password is at least 8 characters
+    // Check the length of requested password is at least 8 characters
     if (numCharacters < 8) {
         window.alert("Your password must be at least 8 characters");
         generatePassword();
     }
 
-    // This makes sure that the length of requested password is no more than 128 characters
+    // Check the length of requested password is no more than 128 characters
     else if (numCharacters > 128) {
         window.alert("Your password must be no more than 128 characters");
         generatePassword();
@@ -28,9 +32,11 @@ function writePassword() {
     else if (numCharacters >= 8 && numCharacters <= 128) {
         var okSpecial = window.confirm("Click OK to confirm including special characters.");
         var okNumeric = window.confirm("Click OK to confirm including numeric values.");
-
+        var okUpperCase = window.confirm("Click OK to confirm including upprcase characters.");
+        var okLowerCase = window.confirm("Click OK to confirm including lowercase characters.");
 
         var combinedArray = [];
+
 
         if (okSpecial) {
             var randomElement = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
@@ -41,7 +47,7 @@ function writePassword() {
         if (okNumeric) {
             var randomElement2 = numbers[Math.floor(Math.random() * numbers.length)];
             passwordGenerated = passwordGenerated + randomElement2;
-
+            combinedArray = combinedArray.concat(numbers);
         }
 
         if (okUpperCase) {
@@ -52,24 +58,33 @@ function writePassword() {
 
         if (okLowerCase) {
             var randomElement4 = lowerCase[Math.floor(Math.random() * lowerCase.length)];
-            passwordGenerated = passwordGenerated + randomElement4;
-            combinedArray = combinedArray.concat(lowerCase);
+
         }
 
-        // Write password to the #password input
-        function writePassword() {
-            passwordGenerated = "";
+    }
 
-            generatePassword();
-            var password = passwordGenerated;
-            if (!password) {
-                return;
-            }
+    else {
+        alert("Please enter a valid number! Please try again!");
+        writePassword();
+        return;
+    }
 
-            var passwordText = document.querySelector("#password");
+};
 
-            passwordText.value = password;
-        }
+// Write password to the #password input
+function writePassword() {
+    passwordGenerated = "";
 
-        // Add event listener to generate button
-        generateBtn.addEventListener("click", writePassword);
+    generatePassword();
+    var password = passwordGenerated;
+    if (!password) {
+        return;
+    }
+
+    var passwordText = document.querySelector("#password");
+
+    passwordText.value = password;
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
