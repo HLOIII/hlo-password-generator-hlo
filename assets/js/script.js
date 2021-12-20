@@ -25,13 +25,37 @@ function writePassword() {
     }
 
     // When requested password is between 8 to 128 characters
-    else {
+    else if (numCharacters >= 8 && numCharacters <= 128) {
         var okSpecial = window.confirm("Click OK to confirm including special characters.");
+        var okNumeric = window.confirm("Click OK to confirm including numeric values.");
+        var okUpperCase = window.confirm("Click OK to confirm including upprcase characters.");
+        var okLowerCase = window.confirm("Click OK to confirm including lowercase characters.");
+
+        var combinedArray = [];
+
         if (okSpecial) {
-            var i = (Math.floor(Math.random) * 10) + 22
-            console.log(specialCharacters[i]);
+            var randomElement = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
+            passwordGenerated = passwordGenerated + randomElement;
+            combinedArray = combinedArray.concat(specialCharacters);
         }
 
+        if (okNumeric) {
+            var randomElement2 = numbers[Math.floor(Math.random() * numbers.length)];
+            passwordGenerated = passwordGenerated + randomElement2;
+            combinedArray = combinedArray.concat(numbers);
+        }
+
+        if (okUpperCase) {
+            var randomElement3 = upperCase[Math.floor(Math.random() * upperCase.length)];
+            passwordGenerated = passwordGenerated + randomElement3;
+            combinedArray = combinedArray.concat(upperCase);
+        }
+
+        if (okLowerCase) {
+            var randomElement4 = lowerCase[Math.floor(Math.random() * lowerCase.length)];
+            passwordGenerated = passwordGenerated + randomElement4;
+            combinedArray = combinedArray.concat(lowerCase);
+        }
 
         var password = generatePassword();
         var passwordText = document.querySelector("#password");
